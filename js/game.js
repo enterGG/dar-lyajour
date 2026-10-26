@@ -314,8 +314,8 @@ function labelFor(cell, status) {
 function speechFor(cell, status, ruined) {
   if (cell.pillar && status === "hole") return "أنا الركيزة. غبتي، الدار طاحت. مبروك على الكوميديا.";
   if (status === "hole") return "فات النهار وأنا فالكيس. الحفرة هي اللي بقات.";
-  if (status === "today" && cell.pillar) return "اليوم ركيزة. كمّل المهام وحطني، وإلا غدا الدار كتطيح.";
-  if (status === "today") return "هادي بلاصة اليوم بوحدها. ما تلسقنيش فحفرة خرى.";
+  if (status === "today" && cell.pillar) return "البلاصة مازال خاوية. كمّل مهام اليوم وحط الياجورة، اليوم ركيزة.";
+  if (status === "today") return "البلاصة خاوية. كمّل المهام ووقتاش تساليهم تحط الياجورة هنا.";
   if (status === "done" && ruined) return "أنا متحط، غير الدار طايحة. الركيزة هي اللي خذلاتنا.";
   if (status === "done") return "أنا فبلاصتي. ما تزيحنيش، ثقيلة.";
   return "مازال. الياجورة ما كتعجبهاش الاستعجال.";
@@ -327,6 +327,10 @@ function summary(project, cells, today, ruined, complete) {
   const holes = cells.filter((cell) => statusOf(cell, project, today) === "hole").length;
   if (holes) return `كاين ${holes} حفر فالحيط. الدار واقفة، غير الريح داخل.`;
   const todayCell = cells.find((cell) => cell.date === today);
+  const placed = cells.filter((cell) => project.done[cell.date]).length;
+  if (placed === 0 && todayCell) {
+    return "الدار خاوية. كمّل مهام النهار الأول، ووقتاش تساليهم تحط أول ياجورة.";
+  }
   if (todayCell && !project.done[today] && todayCell.pillar) {
     return "اليوم ركيزة. إلا ما تحطاتش قبل ما يفوت النهار، الدار غتخرب.";
   }
@@ -345,7 +349,7 @@ function renderPlay(project) {
   const todayCell = cells.find((cell) => cell.date === today);
   els.setup.hidden = true;
   els.play.hidden = false;
-  els.kicker.textContent = ruined ? "الدار تخربات" : "الدار كتبنى";
+  els.kicker.textContent = ruined ? "الدار تخربات" : doneCount === 0 ? "دار خاوية" : "الدار كتبنى";
   els.title.textContent = project.name;
   const left = Math.max(0, project.days - doneCount - holes);
   els.stats.replaceChildren();
