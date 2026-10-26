@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>دار الياجور</title>
+  <meta name="description" content="لعبة كوميدية كتبني دار بالياجور. كل نهار تكمل فيه المهام، تحط ياجورة فبلاصتها. الركيزة إلا بقات خاوية، الدار كتخرب.">
+  <meta name="theme-color" content="#8fd3ef">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=Lalezar&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-row">
+      <a class="brand" href="./">
+        <span class="logo-brick" aria-hidden="true"></span>
+        <span>
+          <strong>دار الياجور</strong>
+          <small>موقع ببلاش، وشكلو لعبة</small>
+        </span>
+      </a>
+      <div class="top-actions" id="top-actions" hidden>
+        <label class="switcher">
+          <span>المشروع</span>
+          <select id="project-switch"></select>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" id="hero">
+      <p class="eyebrow">كوميديا ديال الخدمة</p>
+      <h1>كل نهار تكملو، كتحط ياجورة. النهار اللي يفوتك، كيبقى حفرة.</h1>
+      <p class="lede">سمّي أي مشروع، حط المهام ديالو، والدار كتتركب ياجورة بيأجورة. الياجورة كتمشي غير لبلاصة النهار اللي كمّلتيه. الركائز إلا تخلّاو خاويين، الدار كتخرب وكتضحك عليك.</p>
+    </section>
+
+    <section class="layout">
+      <div class="stage" id="stage">
+        <div class="sky">
+          <span class="cloud cloud-a"></span>
+          <span class="cloud cloud-b"></span>
+          <p class="bubble" id="bubble">سمّي المشروع وجيب الياجور. أنا ما كنبنيش بالنية.</p>
+        </div>
+        <div class="lot" id="lot">
+          <div class="empty-lot" id="empty-lot">
+            <div class="ghost-house" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <span></span><span></span><span></span>
+            </div>
+            <p>البلاصة خاوية. الدار مازال فكرة.</p>
+          </div>
+          <div class="build" id="build" hidden>
+            <div class="chimney" id="chimney" hidden></div>
+            <div class="house" id="house"></div>
+            <div class="dust" id="dust" hidden>طاااخ</div>
+          </div>
+          <div class="ground"><span>التراب</span></div>
+        </div>
+      </div>
+
+      <aside class="panel" id="panel">
+        <form class="card" id="setup-form">
+          <h2>بدا مشروع</h2>
+          <p class="hint">مثلاً موقع مجاني. المهام كتتعاود كل نهار، والياجورة كتتحط مرة وحدة فالنهار.</p>
+          <label>
+            سمية المشروع
+            <input id="project-name" name="name" required maxlength="40" value="موقع مجاني" autocomplete="off">
+          </label>
+          <fieldset>
+            <legend>المهام ديال كل نهار</legend>
+            <div id="task-fields"></div>
+            <div class="add-row">
+              <input id="new-task" maxlength="60" placeholder="زيد مهمة، مثلاً: نكتب الصفحة" autocomplete="off">
+              <button type="button" id="add-task">زيد</button>
+            </div>
+          </fieldset>
+          <div class="split">
+            <label>
+              شحال من نهار
+              <input id="day-count" name="days" type="number" min="3" max="48" value="14" required>
+            </label>
+            <label>
+              نهار البداية
+              <input id="start-date" name="start" type="date" required>
+            </label>
+          </div>
+          <p class="warn" id="start-warn" hidden></p>
+          <button class="go" type="submit">ابني بلايص الياجور</button>
+        </form>
+
+        <div class="card play" id="play" hidden>
+          <p class="kicker" id="play-kicker"></p>
+          <h2 id="play-title"></h2>
+          <p class="stats" id="stats"></p>
+          <p class="hint" id="play-hint"></p>
+          <ul class="checks" id="checks"></ul>
+          <button class="go" type="button" id="place" disabled>حط الياجورة فبلاصتها</button>
+          <div class="row-actions">
+            <button type="button" class="ghost" id="restart">عاود من اليوم</button>
+            <button type="button" class="ghost danger" id="remove">هدم المشروع</button>
+          </div>
+          <button type="button" class="texty" id="another">مشروع آخر</button>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">دار الياجور · النهار اللي ما تقالش كيبقى خاوي، والركيزة هي اللي كتوقف الدار.</div>
+  </footer>
+  <script src="js/game.js"></script>
+</body>
+</html>
